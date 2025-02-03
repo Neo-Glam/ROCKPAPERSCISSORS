@@ -17,29 +17,32 @@ function getComputerChoice(){
     }
 }
 
-function getHumanChoice(){
-    humanChoice = prompt("ROCK ,PAPER ,SCISSORS").toUpperCase();
+let boite = document.querySelector('#boite');
 
-    if (humanChoice === "ROCK"){
-        console.log("You: ROCK")
-        return humanChoice;
+boite.addEventListener('click', (event) =>{
+    let target = event.target;
+
+    switch(target.id){
+        case 'rock':
+            humanChoice = "ROCK";
+            console.log(humanChoice);
+            getComputerChoice();
+            playRound(humanChoice, computerChoice);
+            break;
+        case 'paper':
+            humanChoice = "PAPER";
+            console.log(humanChoice);
+            getComputerChoice()
+            playRound(humanChoice, computerChoice);
+            break;
+        case 'scissors':
+            humanChoice = "SCISSORS";
+            console.log(humanChoice);
+            getComputerChoice()
+            playRound(humanChoice, computerChoice);
+            break;
     }
-
-    else if(humanChoice === "PAPER"){
-        console.log("You: PAPER")
-        return humanChoice;
-    }
-
-    else if(humanChoice === "SCISSORS"){
-        console.log("YOU: SCISSORS")
-        return humanChoice;
-    }
-
-    else{
-        console.log("It's ROCK PAPER SCISSORS my dude :P");
-    }
-
-}
+})
 
 function playRound(humanChoice, computerChoice) {
 
@@ -81,7 +84,6 @@ function playRound(humanChoice, computerChoice) {
 function playGame(){
 
     for(let rounds = 0; rounds < 5; rounds++){
-        getHumanChoice();
         getComputerChoice();
         playRound(humanChoice, computerChoice)
         console.log(humanScore, computerScore)
@@ -102,5 +104,4 @@ function playGame(){
 }
 let humanScore = 0;
 let computerScore = 0;
-playGame();
 
