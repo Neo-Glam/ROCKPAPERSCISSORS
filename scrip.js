@@ -3,7 +3,6 @@ let computerChoice = "";
 let humanScore = 0;
 let computerScore = 0;
 
-
 function getComputerChoice(){
     computerChoice = Math.floor(Math.random() * 100);
     if  (computerChoice <= 33){
@@ -21,46 +20,6 @@ function getComputerChoice(){
         console.log("CPU: SCISSORS")
         return computerChoice
     }
-}
-
-let boite = document.querySelector('#boite');
-
-boite.addEventListener('click', (event) =>{
-    let target = event.target;
-
-    switch(target.id){
-        case 'rock':
-            humanChoice = "ROCK";
-            console.log(humanChoice);
-            getComputerChoice();
-            playRound(humanChoice, computerChoice);
-            newscore();
-            return humanScore + computerScore;
-        case 'paper':
-            humanChoice = "PAPER";
-            console.log(humanChoice);
-            getComputerChoice()
-            playRound(humanChoice, computerChoice);
-            newscore();
-            return humanScore + computerScore;
-        case 'scissors':
-            humanChoice = "SCISSORS";
-            console.log(humanChoice);
-            getComputerChoice()
-            playRound(humanChoice, computerChoice);
-            newscore();
-            return humanScore + computerScore;
-    }
-})
-
-let scoring = document.querySelector('#scoring');
-
-const score = document.createElement("div");
-score.innerText = "Ton Score " + humanScore + " ||| " + " Score Ordi " + computerScore;
-scoring.appendChild(score);
-
-function newscore(){
-    score.innerText = "Ton Score " + humanScore + " ||| " + " Score Ordi " + computerScore;
 }
 
 function playRound(humanChoice, computerChoice) {
@@ -100,26 +59,88 @@ function playRound(humanChoice, computerChoice) {
 
   }
 
-function playGame(){
-
-    for(let rounds = 0; rounds < 5; rounds++){
-        getComputerChoice();
-        playRound(humanChoice, computerChoice)
-        console.log(humanScore, computerScore)
-
+  function checkScore(){
+    if (humanScore >= 5){
+        victory.innerText = "Victoire";
+        humanScore = 0;
+        computerScore = 0;
     }
-    if (humanScore > computerScore){
-        console.log("YOU ARE THE WINNER");
-        return;
-    }
-    else if(humanScore < computerScore){
-        console.log("YOU ARE A BIG LOSER");
-        return;
+    else if (computerScore >= 5){
+        victory.innerText = "Defaite";
+        humanScore = 0;
+        computerScore = 0;
     }
     else{
-        console.log("IT'S A DRAW");
         return;
     }
-}
 
+    }
+
+  let boite = document.querySelector('#boite');
+
+  boite.addEventListener('click', (event) =>{
+      let target = event.target;
+  
+      switch(target.id){
+          case 'rock':
+                if (humanScore >= 5 || computerScore >= 5){
+                    newScore();
+                }
+              humanChoice = "ROCK";
+              console.log(humanChoice);
+              getComputerChoice();
+              playRound(humanChoice, computerChoice);
+              newChoix();
+              newScore();
+              checkScore();
+              break;
+          case 'paper':
+            if (humanScore >= 5 || computerScore >= 5){
+                newScore();
+            }
+              humanChoice = "PAPER";
+              console.log(humanChoice);
+              getComputerChoice()
+              playRound(humanChoice, computerChoice);
+              newChoix();
+              newScore();
+              checkScore();
+              break;
+          case 'scissors':
+            if (humanScore >= 5 || computerScore >= 5){
+                newScore();
+            }
+              humanChoice = "SCISSORS";
+              console.log(humanChoice);
+              getComputerChoice()
+              playRound(humanChoice, computerChoice);
+              newChoix();
+              newScore();
+              checkScore();
+              break;
+      }
+  })
+  
+  let scoring = document.querySelector('#scoring');
+
+  const victory = document.createElement('div');
+  victory.innerText = "";
+  scoring.appendChild(victory);
+  
+  const choix = document.createElement('div');
+  choix.innerText = "toi : " + humanChoice + " ||| " + " Ordi : " + computerChoice;
+  scoring.appendChild(choix);
+  
+  function newChoix(){
+      choix.innerText = "toi : " + humanChoice + " ||| " + " Ordi : " + computerChoice;
+  }
+  
+  const score = document.createElement("div");
+  score.innerText = "Ton Score " + humanScore + " ||| " + " Score Ordi " + computerScore;
+  scoring.appendChild(score);
+  
+  function newScore(){
+      score.innerText = "Ton Score " + humanScore + " ||| " + " Score Ordi " + computerScore;
+  }
+  
 
