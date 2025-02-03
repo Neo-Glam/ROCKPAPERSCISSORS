@@ -1,3 +1,9 @@
+let humanChoice = "";
+let computerChoice = "";
+let humanScore = 0;
+let computerScore = 0;
+
+
 function getComputerChoice(){
     computerChoice = Math.floor(Math.random() * 100);
     if  (computerChoice <= 33){
@@ -28,21 +34,34 @@ boite.addEventListener('click', (event) =>{
             console.log(humanChoice);
             getComputerChoice();
             playRound(humanChoice, computerChoice);
-            break;
+            newscore();
+            return humanScore + computerScore;
         case 'paper':
             humanChoice = "PAPER";
             console.log(humanChoice);
             getComputerChoice()
             playRound(humanChoice, computerChoice);
-            break;
+            newscore();
+            return humanScore + computerScore;
         case 'scissors':
             humanChoice = "SCISSORS";
             console.log(humanChoice);
             getComputerChoice()
             playRound(humanChoice, computerChoice);
-            break;
+            newscore();
+            return humanScore + computerScore;
     }
 })
+
+let scoring = document.querySelector('#scoring');
+
+const score = document.createElement("div");
+score.innerText = "Ton Score " + humanScore + " ||| " + " Score Ordi " + computerScore;
+scoring.appendChild(score);
+
+function newscore(){
+    score.innerText = "Ton Score " + humanScore + " ||| " + " Score Ordi " + computerScore;
+}
 
 function playRound(humanChoice, computerChoice) {
 
@@ -102,6 +121,5 @@ function playGame(){
         return;
     }
 }
-let humanScore = 0;
-let computerScore = 0;
+
 
